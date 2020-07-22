@@ -1,17 +1,48 @@
 //Practical 2 exercises for SIT725 by Aaron Taylor
 //I've added comments throughout this script to explain my thought process as I was doing. 
 //If possible, I've left all redundant code commented and moved it to the bottom of this script to show all work done on practical.
+//Task 1 - Git connection and form - completed
 
+
+//Task 2 - Web Server
 const express = require('express');
 var app = express();
 
-//start the server on port 3000, added the extra flare from online video just for practice.
 var port = 3000
 app.listen(port);
 console.log(`Server listening on: ${port}`);
 
-//load the index.html under the directory public. This one was new to me.
+// Task 2 - Sub Task 1: load the index.html under the directory public. This one was new to me.
 app.use(express.static(__dirname +'/public'));
+
+//Task 2 - Sub Task 2
+var adder = function(num1,num2){
+    var result = num1+num2;
+    return result;
+}
+
+app.get('/add', function(addReq,addRes){
+    var num1 = parseInt(addReq.query.num1);
+    var num2 = parseInt(addReq.query.num2);
+    var result= adder(num1,num2);
+    addRes.send(`The answer is: ${result}`);
+})
+
+//Task 3 - Credit Task
+//Create a GET en point that retrieves data stored into an array.
+
+//Provided Array
+let accounts=[
+    {id:1, name:'alex',deposit:5},
+    {id:2, name:'sarah',deposit:5},
+    {id:3, name:'jim',deposit:15}
+]
+
+//Pull the allocated id from the array and display as a string
+app.get('/dep',function(depReq,depRes){
+    let idPull = parseInt(depReq.query.id) - 1;
+    depRes.send(`User ID: ${accounts[idPull].id}, User Name: ${accounts[idPull].name}, Deposit: ${accounts[idPull].deposit}`);    
+});
 
 
 //I've added this here to just play around and get confident with calling a function in the script using 'get' somewhere else.
