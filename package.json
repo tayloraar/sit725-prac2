@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/tayloraar/sit725-prac2#readme",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "sentiment": "^5.0.2"
   }
 }
